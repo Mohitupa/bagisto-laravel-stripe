@@ -1,7 +1,7 @@
 <?php
 
 namespace Webkul\Shop\Http\Controllers;
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
@@ -10,6 +10,8 @@ use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
+use Session;
+use Stripe;
 
 class OnepageController extends Controller
 {
@@ -407,5 +409,26 @@ class OnepageController extends Controller
             'status'  => ! $status ? false : true,
             'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
         ]);
+    }
+    
+    /**
+     * success response method.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function stripePost(Request $request)
+    {
+        Stripe\Stripe::setApiKey('sk_test_51MIBTTLxzcBJVZsXwuQ6dskCnSK2A1PHrvhpjj5EZgCrKhJSekzbdjILY55fbCnkECwq1gD7r6sWzs5NAcU82dE300XHKLrEhV');
+    
+        Stripe\Charge::create ([
+                "amount" => 50 * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "Test payment from LaravelTus.com." 
+        ]);
+      
+        // session()::flash('success', 'Payment successful!');
+              
+        return back();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /**
  * Sales routes.
@@ -15,3 +16,4 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
         Route::get('/bookings/get', [Webkul\BookingProduct\Http\Controllers\Admin\BookingController::class, 'get'])->name('admin.sales.bookings.get');
     });
 });
+ 

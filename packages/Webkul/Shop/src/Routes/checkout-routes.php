@@ -59,6 +59,11 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout.onepage.index');
 
+    /**
+     * stripe post route
+     */
+    Route::post('/stripe',[OnepageController::class, 'stripePost']);
+
     Route::get('/checkout/summary', [OnepageController::class, 'summary'])->name('shop.checkout.summary');
 
     Route::post('/checkout/save-address', [OnepageController::class, 'saveAddress'])->name('shop.checkout.save-address');

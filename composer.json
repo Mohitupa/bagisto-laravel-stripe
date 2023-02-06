@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.1",
         "astrotomic/laravel-translatable": "^11.0.0",
+        "bagisto/bagisto-package-generator": "dev-master",
         "bagisto/legacy-api": "^1.0",
         "bagisto/rest-api": "dev-master",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
@@ -113,7 +114,8 @@
             "Tests\\API\\": "tests/api/",
             "Tests\\Functional\\": "tests/functional/",
             "Tests\\Trigger\\": "tests/trigger/",
-            "Tests\\Unit\\": "tests/unit/"
+            "Tests\\Unit\\": "tests/unit/",
+            "Webkul\\StripeCustom\\": "packages/Webkul/StripeCustom/src"
         }
     },
     "extra": {
